@@ -1,4 +1,4 @@
 <!DOCTYPE html>
 <html>
-    <h1>User {{$roleName}} cannot create, only view</h1>
+    <h1>User {{$userName}} with {{$roleName}} cannot create, only view</h1>
 </html>

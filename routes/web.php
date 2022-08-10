@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -20,8 +22,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/check-role/{roleName}", function(String $roleName) {
+Route::get("/check-role/{userName}", function(String $userName) {
     RolesController::setRoles();
 
-    return RolesController::getViewForRole($roleName);
+    $allUsers = User::all();
+
+    $selectedUser = $allUsers -> filter(function($item) use ($userName) {
+        return $item -> name == $userName;
+    }) -> first();
+
+    return RolesController::getViewForRole($selectedUser);
 });
